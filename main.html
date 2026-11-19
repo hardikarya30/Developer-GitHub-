@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#3B35AF" />
+<title>Ha Freelance as designer system · Hardik Arya</title>
+<meta name="description" content="Hardik Arya — freelance designer and developer building liquid-glass design systems in Swift, SwiftUI and on the web." />
+<meta property="og:title" content="Ha Freelance as designer system" />
+<meta property="og:image" content="assets/ha-banner.svg" />
+<link rel="icon" type="image/svg+xml" href="assets/ha-logo.svg" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V21h-6.5v-6h-5v6H3z"/></symbol>
+  <symbol id="i-repo" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 1 2-2h13"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.2 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 18l-5.8 3.1 1.1-6.5L2.6 10l6.5-.9z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m9 8-4.5 4L9 16M15 8l4.5 4L15 16"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="m12 3 1.9 5.6 5.6 1.9-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.8 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.8-3.8-9S9.4 5.6 12 3z"/></symbol>
+  <symbol id="i-issue" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.4"/></symbol>
+  <symbol id="i-pull" viewBox="0 0 24 24"><path d="M6 4v12.5"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5.6" r="2"/><path d="M18 7.6v4.4a4 4 0 0 1-4 4H9"/></symbol>
+  <symbol id="i-discussion" viewBox="0 0 24 24"><path d="M20 14a2 2 0 0 1-2 2H9l-5 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="m3.5 7.5 8.5 6 8.5-6"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9.5 3h5l-.8 5.4 3.8 3.9H6.5l3.8-3.9z"/><path d="M12 12.3V21"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z"/></symbol>
+  <symbol id="i-explore" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5.5-5.5 2 2-5.5z"/></symbol>
+  <symbol id="i-copilot" viewBox="0 0 24 24"><path d="M7 9h10a3 3 0 0 1 3 3v2.5A4.5 4.5 0 0 1 15.5 19h-7A4.5 4.5 0 0 1 4 14.5V12a3 3 0 0 1 3-3z"/><circle cx="9.6" cy="13.4" r="1.1"/><circle cx="14.4" cy="13.4" r="1.1"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="main.html" aria-label="Ha Freelance as designer system">
+      <img class="brand-logo" src="assets/ha-logo.svg" alt="HA monogram" />
+      <span class="brand-word">Ha Freelance<span>designer system</span></span>
+    </a>
+
+    <nav class="top-nav landing-nav" aria-label="Site">
+      <a href="main.html" class="active">Main</a>
+      <a href="index.html">Dashboard</a>
+      <a href="index.html#repositories">Repositories</a>
+      <a href="signin.html">Sign in</a>
+    </nav>
+
+    <div class="topbar-actions">
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Open navigation">
+        <svg class="ic"><use href="#i-repo"/></svg>
+      </button>
+      <a class="btn btn-gradient btn-sm" href="index.html">Open dashboard</a>
+    </div>
+  </div>
+</header>
+
+<div class="shell shell-landing">
+  <aside class="sidebar sidebar-left" id="sidebarLeft" aria-label="Main navigation">
+    <nav class="nav-group" aria-label="Primary">
+      <a class="nav-item" href="index.html#home"><svg class="ic"><use href="#i-home"/></svg>Home</a>
+      <a class="nav-item" href="index.html#feed"><svg class="ic"><use href="#i-bolt"/></svg>Feed</a>
+      <a class="nav-item" href="index.html#issues"><svg class="ic"><use href="#i-issue"/></svg>All issues<span class="nav-count">13</span></a>
+      <a class="nav-item" href="index.html#pulls"><svg class="ic"><use href="#i-pull"/></svg>All pull requests<span class="nav-count">2</span></a>
+      <a class="nav-item" href="index.html#repositories"><svg class="ic"><use href="#i-repo"/></svg>All repositories<span class="nav-count">6</span></a>
+      <a class="nav-item" href="index.html#projects"><svg class="ic"><use href="#i-globe"/></svg>Projects</a>
+      <a class="nav-item" href="index.html#discussions"><svg class="ic"><use href="#i-discussion"/></svg>Discussions</a>
+      <a class="nav-item" href="index.html#codespaces"><svg class="ic"><use href="#i-code"/></svg>Codespaces</a>
+      <a class="nav-item" href="index.html#copilot"><svg class="ic"><use href="#i-copilot"/></svg>Copilot</a>
+      <a class="nav-item" href="index.html#explore"><svg class="ic"><use href="#i-explore"/></svg>Explore</a>
+      <a class="nav-item" href="index.html#marketplace"><svg class="ic"><use href="#i-star"/></svg>Marketplace</a>
+      <a class="nav-item" href="index.html#mcp"><svg class="ic"><use href="#i-globe"/></svg>MCP registry</a>
+    </nav>
+
+    <div class="nav-sep"></div>
+
+    <div class="nav-label">Top repositories</div>
+    <div class="repo-links">
+      <a class="repo-link" href="https://github.com/hardikarya30/-X-App-twitter-" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">-X-App-twitter-</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Designing-Facebook-Ui-" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Designing-Facebook-Ui-</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Instagram-app-" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Instagram-app-</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/ha-freelance" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">ha-freelance</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Facebook-web-App" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Facebook-web-App</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/setup-Cursor-AI" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">setup-Cursor-AI</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/ha-freelance-6a41" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">ha-freelance-6a41</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/merry-lab" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">merry-lab</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Replit" target="_blank" rel="noopener">
+        <svg class="ic ic-sm pin"><use href="#i-pin"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Replit</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Designing-my-instagram-" target="_blank" rel="noopener">
+        <svg class="ic ic-sm pin"><use href="#i-pin"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Designing-my-instagram-</span>
+      </a>
+    </div>
+
+    <a class="nav-item repo-more" href="index.html#repositories">Show more repositories</a>
+
+    <div class="sidebar-foot">
+      <a href="index.html" class="btn btn-gradient btn-block">Open dashboard</a>
+      <p class="tiny muted">Signed in as hardikarya30</p>
+    </div>
+  </aside>
+
+  <main class="landing">
+  <section class="landing-hero">
+    <div class="landing-copy">
+      <p class="eyebrow">Freelance design system</p>
+      <h1>Ha Freelance as designer system</h1>
+      <p class="muted">I'm Hardik Arya. I design and build interfaces — liquid-glass dashboards, SwiftUI screens and web experiences — as one reusable system instead of one-off screens.</p>
+      <div class="landing-stats">
+        <div class="landing-stat"><strong>6</strong><span>Public repositories</span></div>
+        <div class="landing-stat"><strong>5</strong><span>UI studies shipped</span></div>
+        <div class="landing-stat"><strong>Swift</strong><span>+ SwiftUI, HTML, TS</span></div>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-gradient" href="index.html">Open the dashboard</a>
+        <a class="btn btn-ghost" href="index.html#repositories">View repositories</a>
+      </div>
+    </div>
+    <img class="landing-logo" src="assets/ha-logo.svg" alt="HA monogram — Ha Freelance as designer system" />
+  </section>
+
+  <section class="sec">
+    <div class="section-head">
+      <h2>The lockup</h2>
+      <p class="tiny muted">The image used on every profile and sign-in screen</p>
+    </div>
+    <figure class="banner-figure">
+      <img src="assets/ha-banner.svg" alt="Ha Freelance as designer system — HA monogram on a purple gradient banner" />
+      <figcaption class="tiny muted">assets/ha-banner.svg · 1280 × 420</figcaption>
+    </figure>
+  </section>
+
+  <section class="sec">
+    <div class="section-head">
+      <h2>What I build</h2>
+      <p class="tiny muted">Three services, one system</p>
+    </div>
+    <div class="model-grid">
+      <article class="model-card">
+        <div class="model-ico"><svg class="ic"><use href="#i-sparkle"/></svg></div>
+        <h3>Design systems</h3>
+        <p class="model-desc">Tokens, type scales and components that stay consistent from prototype to production.</p>
+      </article>
+      <article class="model-card">
+        <div class="model-ico"><svg class="ic"><use href="#i-code"/></svg></div>
+        <h3>SwiftUI interfaces</h3>
+        <p class="model-desc">Liquid-glass cards, motion and 3D depth built the way iOS expects them.</p>
+      </article>
+      <article class="model-card">
+        <div class="model-ico"><svg class="ic"><use href="#i-copilot"/></svg></div>
+        <h3>AI-assisted workflows</h3>
+        <p class="model-desc">Copilot prompts, generators and reviews wired into the day-to-day loop.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="section-head">
+      <h2>Featured repositories</h2>
+      <a class="section-link" href="https://github.com/hardikarya30?tab=repositories" target="_blank" rel="noopener">All on GitHub<svg class="ic ic-xs"><use href="#i-chevron-right"/></svg></a>
+    </div>
+    <div class="repo-grid">
+      <a class="repo-card" href="https://github.com/hardikarya30/Designing-my-instagram-" target="_blank" rel="noopener">
+        <div class="repo-head">
+          <span class="repo-name"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Designing-my-instagram-</span>
+          <span class="pill">Public</span>
+        </div>
+        <p class="repo-desc">Designing my own Instagram with an app called freemilk.ai.</p>
+        <div class="repo-meta"><span class="lang"><i style="background:#F05138"></i>Swift</span><span>Forked</span></div>
+      </a>
+      <a class="repo-card" href="https://github.com/hardikarya30/Designing-Facebook-Ui-" target="_blank" rel="noopener">
+        <div class="repo-head">
+          <span class="repo-name"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Designing-Facebook-Ui-</span>
+          <span class="pill">Public</span>
+        </div>
+        <p class="repo-desc">My own design of the Facebook UI in Swift.</p>
+        <div class="repo-meta"><span class="lang"><i style="background:#F05138"></i>Swift</span><span>Updated 2w</span></div>
+      </a>
+      <a class="repo-card" href="https://github.com/hardikarya30/Instagram-app-" target="_blank" rel="noopener">
+        <div class="repo-head">
+          <span class="repo-name"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Instagram-app-</span>
+          <span class="pill">Public</span>
+        </div>
+        <p class="repo-desc">Designing the Instagram UI.</p>
+        <div class="repo-meta"><span class="lang"><i style="background:#F05138"></i>Swift</span><span>Updated 3w</span></div>
+      </a>
+      <a class="repo-card" href="https://github.com/hardikarya30/-X-App-twitter-" target="_blank" rel="noopener">
+        <div class="repo-head">
+          <span class="repo-name"><svg class="ic ic-sm"><use href="#i-repo"/></svg>-X-App-twitter-</span>
+          <span class="pill">Public</span>
+        </div>
+        <p class="repo-desc">Designing the X app UI.</p>
+        <div class="repo-meta"><span class="lang"><i style="background:#F05138"></i>Swift</span><span>Updated 1mo</span></div>
+      </a>
+      <a class="repo-card" href="https://github.com/hardikarya30/Facebook-web-App" target="_blank" rel="noopener">
+        <div class="repo-head">
+          <span class="repo-name"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Facebook-web-App</span>
+          <span class="pill">Public</span>
+        </div>
+        <p class="repo-desc">Web version of the Facebook interface.</p>
+        <div class="repo-meta"><span class="lang"><i style="background:#E34F26"></i>HTML</span><span>Updated 1mo</span></div>
+      </a>
+      <a class="repo-card" href="https://github.com/hardikarya30/Replit" target="_blank" rel="noopener">
+        <div class="repo-head">
+          <span class="repo-name"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Replit</span>
+          <span class="pill">Public</span>
+        </div>
+        <p class="repo-desc">Design from Replit.</p>
+        <div class="repo-meta"><span class="lang"><i style="background:#3178C6"></i>TypeScript</span><span>Updated 1mo</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="section-head">
+      <h2>The palette</h2>
+      <p class="tiny muted">Same tokens as the dashboard</p>
+    </div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#3B35AF"></div>
+        <div class="swatch-meta"><strong>Brand blue</strong><span class="tiny muted">#3B35AF</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#32288C"></div>
+        <div class="swatch-meta"><strong>Home surface</strong><span class="tiny muted">#32288C</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#DBE7F5"></div>
+        <div class="swatch-meta"><strong>Design light</strong><span class="tiny muted">#DBE7F5</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#5A3DD3"></div>
+        <div class="swatch-meta"><strong>Message violet</strong><span class="tiny muted">#5A3DD3</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:linear-gradient(135deg,#3100F6,#32288C)"></div>
+        <div class="swatch-meta"><strong>Gradient</strong><span class="tiny muted">#3100F6 → #32288C</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div>
+      <h2>Let's build your system</h2>
+      <p class="muted">Design and code, in one loop. The dashboard already has your repositories, Copilot and issues wired in.</p>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-glow" href="index.html">Open the dashboard</a>
+      <a class="btn btn-ghost" href="signup.html">Create an account</a>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span class="tiny muted">© Hardik Arya · Ha Freelance as designer system</span>
+    <span class="landing-foot-links">
+      <a class="tiny" href="index.html">Dashboard</a>
+      <a class="tiny" href="https://github.com/hardikarya30" target="_blank" rel="noopener">GitHub</a>
+      <a class="tiny" href="signin.html">Sign in</a>
+    </span>
+  </footer>
+</main>
+</div>
+
+<script>
+  (function () {
+    var toggle = document.getElementById('navToggle');
+    if (toggle) {
+      toggle.addEventListener('click', function (event) {
+        event.stopPropagation();
+        document.body.classList.toggle('nav-open');
+      });
+    }
+    document.addEventListener('click', function (event) {
+      if (document.body.classList.contains('nav-open') &&
+          !event.target.closest('.sidebar') &&
+          !event.target.closest('#navToggle')) {
+        document.body.classList.remove('nav-open');
+      }
+    });
+  })();
+</script>
+</body>
+</html>

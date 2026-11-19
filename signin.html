@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#3B35AF" />
+<title>Sign in · GitHub 3D</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" type="image/svg+xml" href="assets/ha-logo.svg" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="m3.5 7.5 8.5 6 8.5-6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10.5" rx="2.4"/><path d="M8 10V7.6a4 4 0 0 1 8 0V10"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 4.5 4.5L20 6"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.2 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 18l-5.8 3.1 1.1-6.5L2.6 10l6.5-.9z"/></symbol>
+  <symbol id="i-copilot" viewBox="0 0 24 24"><path d="M7 9h10a3 3 0 0 1 3 3v2.5A4.5 4.5 0 0 1 15.5 19h-7A4.5 4.5 0 0 1 4 14.5V12a3 3 0 0 1 3-3z"/><circle cx="9.6" cy="13.4" r="1.1"/><circle cx="14.4" cy="13.4" r="1.1"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m9 8-4.5 4L9 16M15 8l4.5 4L15 16"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html" aria-label="GitHub home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="brand-svg"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.9c-2.7.6-3.3-1.2-3.3-1.2-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-1.9 1-2.6-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.5 1 2.6 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></svg>
+      </span>
+      <span class="brand-name">GitHub</span>
+    </a>
+    <div class="topbar-actions">
+      <a class="btn btn-ghost btn-sm" href="signup.html">Sign up</a>
+    </div>
+  </div>
+</header>
+
+<main class="auth-shell">
+  <section class="auth-card">
+    <div class="auth-head">
+      <img class="auth-logo" src="assets/ha-logo.svg" alt="HA monogram — Ha Freelance as designer system" />
+      <h1>Sign in to Ha Freelance</h1>
+      <p>Welcome back, Hardik. Pick up your repositories and Copilot chats where you left them.</p>
+    </div>
+
+    <form class="auth-form" data-auth="signin" novalidate>
+      <div class="field">
+        <label for="signinEmail">Email</label>
+        <input id="signinEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+      </div>
+      <div class="field">
+        <label for="signinPassword">Password</label>
+        <input id="signinPassword" name="password" type="password" autocomplete="current-password" placeholder="At least 8 characters" minlength="8" required />
+      </div>
+      <label class="auth-check">
+        <input type="checkbox" />
+        Keep me signed in
+      </label>
+      <button class="btn btn-gradient btn-block" type="submit">Sign in</button>
+    </form>
+
+    <div class="auth-row">
+      <span>New to GitHub?</span>
+      <a href="signup.html">Create an account</a>
+    </div>
+
+    <div class="auth-alt">
+      <a href="main.html">Main page</a>
+      <a href="index.html">Back to the dashboard</a>
+    </div>
+    <p class="auth-note">Every block on this page uses 10px padding and 10px margin, set in styles.css.</p>
+  </section>
+
+  <aside class="auth-side">
+    <h2>Everything is where you left it</h2>
+    <div class="auth-feature">
+      <span class="auth-ico"><svg class="ic"><use href="#i-bolt"/></svg></span>
+      <div><strong>Top Repositories</strong><span>Six public repositories, pinned and ready.</span></div>
+    </div>
+    <div class="auth-feature">
+      <span class="auth-ico"><svg class="ic"><use href="#i-copilot"/></svg></span>
+      <div><strong>Copilot models</strong><span>Auto, GPT-5.4 mini, GPT-5.4 and GPT-5.4 pro.</span></div>
+    </div>
+    <div class="auth-feature">
+      <span class="auth-ico"><svg class="ic"><use href="#i-star"/></svg></span>
+      <div><strong>Favorites</strong><span>The repositories you starred stay at the top.</span></div>
+    </div>
+    <div class="auth-feature">
+      <span class="auth-ico"><svg class="ic"><use href="#i-check"/></svg></span>
+      <div><strong>Shortcuts</strong><span>Issues, pull requests and discussions, one tap away.</span></div>
+    </div>
+  </aside>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>

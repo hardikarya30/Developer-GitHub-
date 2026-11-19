@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#3B35AF" />
+<title>hardikarya30 · GitHub 3D Dashboard</title>
+<meta name="description" content="A dark, liquid-glass GitHub dashboard with 3D cards, glowing gradients and an interactive developer profile for hardikarya30." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  if (window.tailwind) {
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#3B35AF',
+            home: '#32288C',
+            design: '#DBE7F5',
+            msg: '#5A3DD3',
+            deep: '#3100F6'
+          }
+        }
+      }
+    };
+  }
+</script>
+<link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+
+<!-- ================= icon sprite ================= -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V21h-6.5v-6h-5v6H3z"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M4 13.5 6.5 5h11L20 13.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 13.5h4l1.5 2.5h5l1.5-2.5h4"/></symbol>
+  <symbol id="i-explore" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5.5-5.5 2 2-5.5z"/></symbol>
+  <symbol id="i-copilot" viewBox="0 0 24 24"><path d="M7 9h10a3 3 0 0 1 3 3v2.5A4.5 4.5 0 0 1 15.5 19h-7A4.5 4.5 0 0 1 4 14.5V12a3 3 0 0 1 3-3z"/><circle cx="9.6" cy="13.4" r="1.1"/><circle cx="14.4" cy="13.4" r="1.1"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M4.5 12 20.5 4l-7 16-2.7-6.3z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m9 8-4.5 4L9 16M15 8l4.5 4L15 16"/></symbol>
+  <symbol id="i-issue" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.4"/></symbol>
+  <symbol id="i-pull" viewBox="0 0 24 24"><path d="M6 4v12.5"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5.6" r="2"/><path d="M18 7.6v4.4a4 4 0 0 1-4 4H9"/></symbol>
+  <symbol id="i-repo" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 1 2-2h13"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.2 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 18l-5.8 3.1 1.1-6.5L2.6 10l6.5-.9z"/></symbol>
+  <symbol id="i-discussion" viewBox="0 0 24 24"><path d="M20 14a2 2 0 0 1-2 2H9l-5 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="m3.5 7.5 8.5 6 8.5-6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4M4 19h16"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.6v2.6M12 18.8v2.6M4.4 12H1.8M22.2 12h-2.6M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8"/></symbol>
+  <symbol id="i-signout" viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10.5 8 6.5 12l4 4M6.5 12H16"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 4.5 4.5L20 6"/></symbol>
+  <symbol id="i-calculator" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 7h8M8 11.5h.01M12 11.5h.01M16 11.5h.01M8 15.5h.01M12 15.5h.01M16 15.5v3M8 19h4"/></symbol>
+  <symbol id="i-game" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="10" rx="5"/><path d="M7.5 10.5v3M6 12h3M15.6 11h.01M18 13h.01"/></symbol>
+  <symbol id="i-diagram" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4.5" rx="1.2"/><rect x="2.5" y="16.5" width="6" height="4.5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="4.5" rx="1.2"/><path d="M12 7.5V12M5.5 16.5V12h13v4.5"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="m12 3 1.9 5.6 5.6 1.9-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10.5" rx="2.4"/><path d="M8 10V7.6a4 4 0 0 1 8 0V10"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 16.5H6l1.4-2.2V10a4.6 4.6 0 0 1 9.2 0v4.3z"/><path d="M10 19.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 5.5v-1a1 1 0 0 0-1-1h-10a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h1"/></symbol>
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="7" cy="5" r="2.2"/><circle cx="7" cy="19" r="2.2"/><circle cx="17" cy="9" r="2.2"/><path d="M7 7.2v9.6M17 11.2c0 3-2.5 3.6-5 4.2"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.8 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.8-3.8-9S9.4 5.6 12 3z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9.5 3h5l-.8 5.4 3.8 3.9H6.5l3.8-3.9z"/><path d="M12 12.3V21"/></symbol>
+</svg>
+
+<!-- ================= top bar ================= -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="icon-btn nav-toggle" id="navToggle" aria-label="Open navigation">
+      <svg class="ic"><use href="#i-repo"/></svg>
+    </button>
+
+    <a class="brand" href="#home" data-page="home" aria-label="GitHub home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="brand-svg"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.9c-2.7.6-3.3-1.2-3.3-1.2-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-1.9 1-2.6-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.5 1 2.6 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></svg>
+      </span>
+      <span class="brand-name">GitHub</span>
+    </a>
+
+    <div class="search">
+      <svg class="ic ic-sm"><use href="#i-search"/></svg>
+      <input id="globalSearch" type="search" placeholder="Type / to search" aria-label="Search GitHub" />
+      <kbd>/</kbd>
+    </div>
+
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#home" data-page="home" class="active">Home</a>
+      <a href="#issues" data-page="issues">Issues</a>
+      <a href="#pulls" data-page="pulls">Pull requests</a>
+      <a href="#discussions" data-page="discussions">Discussions</a>
+      <a href="#explore" data-page="explore">Explore</a>
+      <a href="main.html">Main</a>
+    </nav>
+
+    <div class="topbar-actions">
+      <button class="icon-btn profile-toggle-btn" id="profileToggle" aria-label="Open profile sidebar">
+        <svg class="ic"><use href="#i-star"/></svg>
+      </button>
+
+      <button class="icon-btn" data-page="inbox" aria-label="Notifications">
+        <svg class="ic"><use href="#i-bell"/></svg><span class="dot"></span>
+      </button>
+
+      <div class="dropdown" data-dropdown>
+        <button class="icon-btn" data-dropdown-toggle aria-label="Create new">
+          <svg class="ic"><use href="#i-plus"/></svg>
+        </button>
+        <div class="menu menu-right">
+          <div class="menu-label">Create new</div>
+          <button class="menu-item" data-modal-open="repo">New repository</button>
+          <button class="menu-item" data-modal-open="issue">New issue</button>
+          <button class="menu-item" data-page="codespaces">New codespace</button>
+        </div>
+      </div>
+
+      <div class="dropdown" data-dropdown>
+        <button class="avatar" data-dropdown-toggle aria-label="Account menu"><img class="avatar-img" src="assets/ha-logo.svg" alt="Hardik Arya" /></button>
+        <div class="menu menu-right">
+          <div class="menu-head">
+            <strong>Hardik Arya</strong>
+            <span class="tiny muted">hardikarya30</span>
+          </div>
+          <button class="menu-item" data-modal-open="status">Set status</button>
+          <button class="menu-item" data-page="repositories">Profile</button>
+          <a class="menu-item" href="signup.html">Create account</a>
+          <a class="menu-item" href="signin.html">Sign in</a>
+          <div class="menu-sep"></div>
+          <a class="menu-item" href="signin.html">Sign out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <!-- ================= left sidebar ================= -->
+  <aside class="sidebar sidebar-left" id="sidebarLeft" aria-label="Main navigation">
+    <nav class="nav-group" aria-label="Primary">
+      <a class="nav-item active" href="#home" data-page="home"><svg class="ic"><use href="#i-home"/></svg>Home</a>
+      <a class="nav-item" href="#feed" data-page="feed"><svg class="ic"><use href="#i-bolt"/></svg>Feed</a>
+      <a class="nav-item" href="#issues" data-page="issues"><svg class="ic"><use href="#i-issue"/></svg>All issues<span class="nav-count">13</span></a>
+      <a class="nav-item" href="#pulls" data-page="pulls"><svg class="ic"><use href="#i-pull"/></svg>All pull requests<span class="nav-count">2</span></a>
+      <a class="nav-item" href="#repositories" data-page="repositories"><svg class="ic"><use href="#i-repo"/></svg>All repositories<span class="nav-count">10</span></a>
+      <a class="nav-item" href="#projects" data-page="projects"><svg class="ic"><use href="#i-diagram"/></svg>Projects</a>
+      <a class="nav-item" href="#discussions" data-page="discussions"><svg class="ic"><use href="#i-discussion"/></svg>Discussions</a>
+      <a class="nav-item" href="#codespaces" data-page="codespaces"><svg class="ic"><use href="#i-code"/></svg>Codespaces</a>
+      <a class="nav-item" href="#copilot" data-page="copilot"><svg class="ic"><use href="#i-copilot"/></svg>Copilot</a>
+      <a class="nav-item" href="#explore" data-page="explore"><svg class="ic"><use href="#i-explore"/></svg>Explore</a>
+      <a class="nav-item" href="#marketplace" data-page="marketplace"><svg class="ic"><use href="#i-star"/></svg>Marketplace</a>
+      <a class="nav-item" href="#mcp" data-page="mcp"><svg class="ic"><use href="#i-globe"/></svg>MCP registry</a>
+    </nav>
+
+    <div class="nav-sep"></div>
+
+    <div class="nav-label">Top repositories</div>
+    <div class="repo-links">
+      <a class="repo-link" href="https://github.com/hardikarya30/-X-App-twitter-" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">-X-App-twitter-</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Designing-Facebook-Ui-" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Designing-Facebook-Ui-</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Instagram-app-" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Instagram-app-</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/ha-freelance" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">ha-freelance</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Facebook-web-App" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Facebook-web-App</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/setup-Cursor-AI" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">setup-Cursor-AI</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/ha-freelance-6a41" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">ha-freelance-6a41</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/merry-lab" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-repo"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">merry-lab</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Replit" target="_blank" rel="noopener">
+        <svg class="ic ic-sm pin"><use href="#i-pin"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Replit</span>
+      </a>
+      <a class="repo-link" href="https://github.com/hardikarya30/Designing-my-instagram-" target="_blank" rel="noopener">
+        <svg class="ic ic-sm pin"><use href="#i-pin"/></svg><span class="repo-link-owner">hardikarya30/</span><span class="repo-link-name">Designing-my-instagram-</span>
+      </a>
+    </div>
+
+    <a class="nav-item repo-more" href="#repositories" data-page="repositories">Show more repositories</a>
+
+    <div class="sidebar-foot">
+      <button class="btn btn-ghost btn-sm btn-block" data-modal-open="repo">
+        <svg class="ic ic-sm"><use href="#i-plus"/></svg>New repository
+      </button>
+      <a href="signup.html" class="btn btn-gradient btn-block">Create account</a>
+      <p class="tiny muted">Signed in as hardikarya30</p>
+    </div>
+  </aside>
+
+  <!-- ================= main ================= -->
+  <main class="main">
+
+    <!-- ===================== top profile navigation ===================== -->
+    <nav class="profile-tabs" aria-label="Profile">
+      <div class="tabs-row">
+        <a class="profile-tab active" href="#home" data-page="home">
+          <svg class="ic ic-sm"><use href="#i-home"/></svg>Overview
+        </a>
+        <a class="profile-tab" href="#repositories" data-page="repositories">
+          <svg class="ic ic-sm"><use href="#i-repo"/></svg>Repositories
+          <span class="tab-count">10</span>
+        </a>
+
+        <div class="dropdown" data-dropdown>
+          <button class="profile-tab" data-dropdown-toggle aria-expanded="false">
+            More
+            <svg class="ic ic-xs"><use href="#i-chevron-down"/></svg>
+          </button>
+          <div class="menu">
+            <div class="menu-label">More options</div>
+            <button class="menu-item" data-page="repositories">Repositories<span class="menu-hint">10</span></button>
+            <button class="menu-item" data-page="projects">Projects<span class="menu-hint">1</span></button>
+            <button class="menu-item" data-page="packages">Packages<span class="menu-hint">0</span></button>
+            <button class="menu-item" data-page="starred">Stars<span class="menu-hint">0</span></button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ============================================================ HOME -->
+    <section class="page page-home active" id="page-home" data-page-id="home">
+      <header class="hero hero-with-logo">
+        <img class="hero-logo" src="assets/ha-logo.svg" alt="HA monogram — Ha Freelance as designer system" />
+        <div class="hero-text">
+          <p class="eyebrow">Dashboard</p>
+          <h1>Good afternoon, Me Hardik Arya.</h1>
+          <p class="hero-sub">Your repositories, Copilot and issues in one liquid-glass workspace.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-ghost" data-toast="Profile shared">Share profile</button>
+          <a class="btn btn-gradient" href="signup.html">Sign up</a>
+        </div>
+      </header>
+
+      <!-- home page sections -->
+      <section class="sec home-pages">
+        <div class="section-head">
+          <h2>Your pages</h2>
+          <p class="tiny muted">Everything one tap away</p>
+        </div>
+        <div class="page-tiles">
+          <button class="page-tile" data-page="issues">
+            <svg class="ic"><use href="#i-issue"/></svg>
+            <span class="tile-copy"><strong>Issues page</strong><span class="tiny muted">13 open · 4 assigned to you</span></span>
+          </button>
+          <button class="page-tile" data-page="discussions">
+            <svg class="ic"><use href="#i-discussion"/></svg>
+            <span class="tile-copy"><strong>Discussions</strong><span class="tiny muted">2 conversations</span></span>
+          </button>
+          <button class="page-tile" data-page="projects">
+            <svg class="ic"><use href="#i-diagram"/></svg>
+            <span class="tile-copy"><strong>Projects page</strong><span class="tiny muted">Design backlog · 8 cards</span></span>
+          </button>
+          <button class="page-tile" data-page="repositories">
+            <svg class="ic"><use href="#i-repo"/></svg>
+            <span class="tile-copy"><strong>Top Repositories</strong><span class="tiny muted">Pinned and recently used</span></span>
+          </button>
+          <button class="page-tile" data-page="organisations">
+            <svg class="ic"><use href="#i-globe"/></svg>
+            <span class="tile-copy"><strong>Organisations</strong><span class="tiny muted">1 organisation</span></span>
+          </button>
+          <button class="page-tile" data-page="starred">
+            <svg class="ic"><use href="#i-star"/></svg>
+            <span class="tile-copy"><strong>Starred page</strong><span class="tiny muted">Saved for later</span></span>
+          </button>
+          <a class="page-tile" href="main.html">
+            <svg class="ic"><use href="#i-globe"/></svg>
+            <span class="tile-copy"><strong>Main page</strong><span class="tiny muted">Ha Freelance as designer system</span></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- prompt / model card -->
+      <section class="card prompt-card">
+        <div class="prompt-top">
+          <div class="dropdown" data-dropdown>
+            <button class="btn btn-ghost btn-sm" data-dropdown-toggle>
+              <svg class="ic ic-xs"><use href="#i-sparkle"/></svg>
+              <span>Models · <strong id="modelLabel">Auto</strong></span>
+              <svg class="ic ic-xs"><use href="#i-chevron-down"/></svg>
+            </button>
+            <div class="menu" id="modelMenu">
+              <div class="menu-label">Models</div>
+              <button class="menu-item active" data-model="Auto">Auto<span class="menu-hint">Balanced default</span></button>
+              <button class="menu-item" data-model="GPT-5.4 mini">GPT-5.4 mini<span class="menu-hint">Fast</span></button>
+              <button class="menu-item" data-model="GPT-5.4">GPT-5.4<span class="menu-hint">Versatile</span></button>
+              <button class="menu-item" data-model="GPT-5.4 pro">GPT-5.4 pro<span class="menu-hint">Complex</span></button>
+              <div class="menu-sep"></div>
+              <a class="menu-item menu-upgrade" href="signup.html">
+                <svg class="ic ic-sm"><use href="#i-plus"/></svg>
+                Upgrade to access more models and higher limits
+              </a>
+            </div>
+          </div>
+
+          <span class="pill">Auto</span>
+
+          <div class="dropdown" data-dropdown>
+            <button class="btn btn-ghost btn-sm" data-dropdown-toggle>
+              Optimised for: <strong id="optimiseLabel">Balance</strong>
+              <svg class="ic ic-xs"><use href="#i-chevron-down"/></svg>
+            </button>
+            <div class="menu menu-right">
+              <div class="menu-label">Optimised for</div>
+              <button class="menu-item" data-optimise="Efficiency">Efficiency<span class="menu-hint">Prioritises speed and efficiency</span></button>
+              <button class="menu-item active" data-optimise="Balance">Balance<span class="menu-hint">Balances speed and intelligence</span></button>
+              <button class="menu-item" data-optimise="Intelligence">Intelligence<span class="menu-hint">Prioritises intelligence</span></button>
+            </div>
+          </div>
+        </div>
+
+        <article class="message-card">
+          <span class="msg-avatar"><img class="avatar-img" src="assets/ha-logo.svg" alt="Hardik Arya" /></span>
+          <div class="msg-body">
+            <p class="msg-meta">Me <span class="muted tiny">· 2:41 PM</span></p>
+            <p class="msg-text">Help me find the root cause of this error <code>[past error here]</code>.</p>
+          </div>
+          <button class="icon-btn ghost" data-toast="Message copied" aria-label="Copy message">
+            <svg class="ic"><use href="#i-copy"/></svg>
+          </button>
+        </article>
+
+        <form class="prompt-form" id="promptForm">
+          <textarea class="prompt-input" id="promptInput" rows="2" placeholder="Ask anything, or describe the change you want…"></textarea>
+          <div class="prompt-bar">
+            <div class="chip-row">
+              <button type="button" class="chip" data-toast="Context picker opened">+ Add context</button>
+              <button type="button" class="chip" data-page="repositories">Repository</button>
+              <button type="button" class="chip" data-toast="Branch selector: main">Branch: main</button>
+            </div>
+            <button class="btn btn-gradient btn-icon" type="submit" aria-label="Send">
+              <svg class="ic"><use href="#i-send"/></svg>
+            </button>
+          </div>
+        </form>
+        <div class="messages" id="messages" aria-live="polite"></div>
+      </section>
+
+      <!-- actions -->
+      <section class="sec">
+        <div class="section-head">
+          <h2>Actions</h2>
+          <p class="tiny muted">Everything one tap away</p>
+        </div>
+        <div class="action-grid">
+          <button class="action-btn" data-modal-open="issue">
+            <svg class="ic"><use href="#i-issue"/></svg>
+            <span>Create issue</span>
+          </button>
+
+          <div class="dropdown" data-dropdown>
+            <button class="action-btn wide" data-dropdown-toggle>
+              <svg class="ic"><use href="#i-code"/></svg>
+              <span>Write code</span>
+              <svg class="ic ic-xs chev"><use href="#i-chevron-down"/></svg>
+            </button>
+            <div class="menu">
+              <div class="menu-label">Write code</div>
+              <button class="menu-item" data-promote="Write a SwiftUI view with a liquid-glass card">SwiftUI view</button>
+              <button class="menu-item" data-promote="Write a Swift function with unit tests">Swift function</button>
+              <button class="menu-item" data-promote="Refactor this file and explain the changes">Refactor a file</button>
+              <button class="menu-item" data-promote="Write documentation comments for this code">Add documentation</button>
+            </div>
+          </div>
+
+          <button class="action-btn" data-agent="Debbie">
+            <svg class="ic"><use href="#i-sparkle"/></svg>
+            <span>Debbie</span>
+          </button>
+
+          <button class="action-btn" data-agent="Agent">
+            <svg class="ic"><use href="#i-copilot"/></svg>
+            <span>Agent</span>
+          </button>
+
+          <div class="dropdown" data-dropdown>
+            <button class="action-btn wide" data-dropdown-toggle>
+              <svg class="ic"><use href="#i-branch"/></svg>
+              <span>Git</span>
+              <svg class="ic ic-xs chev"><use href="#i-chevron-down"/></svg>
+            </button>
+            <div class="menu">
+              <div class="menu-label">Git</div>
+              <button class="menu-item" data-promote="Show me the basic Git commands with examples">Basic Git commands</button>
+              <button class="menu-item" data-promote="Explain Git branching with a diagram">Git branching</button>
+              <button class="menu-item" data-promote="Advanced Git commands: rebase, reflog, bisect">Advanced Git commands</button>
+            </div>
+          </div>
+
+          <button class="action-btn" data-modal-open="repo">
+            <svg class="ic"><use href="#i-repo"/></svg>
+            <span>Create repository</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- models -->
+      <section class="sec" id="models">
+        <div class="section-head">
+          <h2>Models</h2>
+          <a class="section-link" href="signup.html">Upgrade<svg class="ic ic-xs"><use href="#i-chevron-right"/></svg></a>
+        </div>
+        <div class="model-grid">
+          <article class="model-card">
+            <div class="model-ico"><svg class="ic"><use href="#i-bolt"/></svg></div>
+            <h3>Fast and cost-efficient.</h3>
+            <p class="model-name">GPT-5.4 mini</p>
+            <p class="model-desc">Quick answers for small edits, tests and everyday questions.</p>
+          </article>
+          <article class="model-card">
+            <div class="model-ico"><svg class="ic"><use href="#i-sparkle"/></svg></div>
+            <h3>Versatile and highly intelligent.</h3>
+            <p class="model-name">GPT-5.4</p>
+            <p class="model-desc">The balanced default for most coding and review tasks.</p>
+          </article>
+          <article class="model-card">
+            <div class="model-ico"><svg class="ic"><use href="#i-copilot"/></svg></div>
+            <h3>Most powerful at complex tasks.</h3>
+            <p class="model-name">GPT-5.4 pro</p>
+            <p class="model-desc">Deep reasoning for large refactors and architecture work.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="section-head"><h2>Optimised for</h2></div>
+        <div class="opt-list">
+          <button class="opt-option" data-optimise="Efficiency">
+            <span class="radio"></span>
+            <span class="opt-copy"><strong>Efficiency</strong><span class="tiny muted">Prioritises speed and efficiency.</span></span>
+          </button>
+          <button class="opt-option active" data-optimise="Balance">
+            <span class="radio"></span>
+            <span class="opt-copy"><strong>Balance</strong><span class="tiny muted">Balances speed and intelligence.</span></span>
+          </button>
+          <button class="opt-option" data-optimise="Intelligence">
+            <span class="radio"></span>
+            <span class="opt-copy"><strong>Intelligence</strong><span class="tiny muted">Prioritises intelligence.</span></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- suggestions -->
+      <section class="sec">
+        <div class="section-head"><h2>Try one of these</h2></div>
+        <div class="suggest-grid">
+          <button class="suggest" data-demo="calculator">
+            <svg class="ic"><use href="#i-calculator"/></svg>
+            <span class="suggest-copy"><strong>Generate a simple calculator</strong><span class="tiny muted">Working demo</span></span>
+          </button>
+          <button class="suggest" data-demo="pong">
+            <svg class="ic"><use href="#i-game"/></svg>
+            <span class="suggest-copy"><strong>Make a Pong game</strong><span class="tiny muted">Playable</span></span>
+          </button>
+          <button class="suggest" data-demo="mermaid">
+            <svg class="ic"><use href="#i-diagram"/></svg>
+            <span class="suggest-copy"><strong>Design a Mermaid architecture overview</strong><span class="tiny muted">Flow diagram</span></span>
+          </button>
+          <button class="suggest" data-demo="readme">
+            <svg class="ic"><use href="#i-repo"/></svg>
+            <span class="suggest-copy"><strong>Create a profile README</strong><span class="tiny muted">Markdown</span></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Copilot app -->
+      <section class="promo">
+        <div class="promo-copy">
+          <p class="eyebrow">Copilot</p>
+          <h2>The GitHub Copilot app</h2>
+          <p class="muted">Bring Copilot to your phone. Review pull requests, ask about an error and ship from anywhere.</p>
+        </div>
+        <button class="btn btn-glow" data-modal-open="download">
+          <svg class="ic"><use href="#i-download"/></svg>
+          Send me download link
+        </button>
+      </section>
+
+      <!-- top repositories -->
+      <section class="sec" id="topRepos">
+        <div class="section-head">
+          <h2>Top Repositories</h2>
+          <a class="section-link" href="#repositories" data-page="repositories">All<svg class="ic ic-xs"><use href="#i-chevron-right"/></svg></a>
+        </div>
+
+        <div class="first-project">
+          <div>
+            <h3>Create your first project</h3>
+            <p class="muted">Ready to start building? Create a repository for a new idea or bring over an existing repository to keep contributing to it.</p>
+          </div>
+          <div class="first-project-actions">
+            <button class="btn btn-gradient" data-modal-open="repo">Create repository</button>
+            <button class="btn btn-ghost" data-toast="Import from GitHub is coming soon">Import repository</button>
+          </div>
+        </div>
+
+        <div class="repo-grid" id="repoGrid">
+          <article class="repo-card">
+            <div class="repo-head">
+              <a class="repo-name" href="https://github.com/hardikarya30/Designing-my-instagram-" target="_blank" rel="noopener"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Designing-my-instagram-</a>
+              <span class="pill">Public</span>
+            </div>
+            <p class="repo-desc">Designing my own Instagram with an app called freemilk.ai.</p>
+            <div class="repo-meta">
+              <span class="lang"><i style="background:#F05138"></i>Swift</span>
+              <span>Forked</span>
+              <button class="repo-star" data-favorite="Designing-my-instagram-" aria-label="Add to favourites">☆</button>
+            </div>
+          </article>
+
+          <article class="repo-card">
+            <div class="repo-head">
+              <a class="repo-name" href="https://github.com/hardikarya30/Designing-Facebook-Ui-" target="_blank" rel="noopener"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Designing-Facebook-Ui-</a>
+              <span class="pill">Public</span>
+            </div>
+            <p class="repo-desc">My own design of the Facebook UI in Swift.</p>
+            <div class="repo-meta">
+              <span class="lang"><i style="background:#F05138"></i>Swift</span>
+              <span>Updated 2w</span>
+              <button class="repo-star" data-favorite="Designing-Facebook-Ui-" aria-label="Add to favourites">☆</button>
+            </div>
+          </article>
+
+          <article class="repo-card">
+            <div class="repo-head">
+              <a class="repo-name" href="https://github.com/hardikarya30/Instagram-app-" target="_blank" rel="noopener"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Instagram-app-</a>
+              <span class="pill">Public</span>
+            </div>
+            <p class="repo-desc">Designing the Instagram UI.</p>
+            <div class="repo-meta">
+              <span class="lang"><i style="background:#F05138"></i>Swift</span>
+              <span>Updated 3w</span>
+              <button class="repo-star" data-favorite="Instagram-app-" aria-label="Add to favourites">☆</button>
+            </div>
+          </article>
+
+          <article class="repo-card">
+            <div class="repo-head">
+              <a class="repo-name" href="https://github.com/hardikarya30/-X-App-twitter-" target="_blank" rel="noopener"><svg class="ic ic-sm"><use href="#i-repo"/></svg>-X-App-twitter-</a>
+              <span class="pill">Public</span>
+            </div>
+            <p class="repo-desc">Designing the X app UI.</p>
+            <div class="repo-meta">
+              <span class="lang"><i style="background:#F05138"></i>Swift</span>
+              <span>Updated 1mo</span>
+              <button class="repo-star" data-favorite="-X-App-twitter-" aria-label="Add to favourites">☆</button>
+            </div>
+          </article>
+
+          <article class="repo-card">
+            <div class="repo-head">
+              <a class="repo-name" href="https://github.com/hardikarya30/Facebook-web-App" target="_blank" rel="noopener"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Facebook-web-App</a>
+              <span class="pill">Public</span>
+            </div>
+            <p class="repo-desc">Web version of the Facebook interface.</p>
+            <div class="repo-meta">
+              <span class="lang"><i style="background:#E34F26"></i>HTML</span>
+              <span>Updated 1mo</span>
+              <button class="repo-star" data-favorite="Facebook-web-App" aria-label="Add to favourites">☆</button>
+            </div>
+          </article>
+
+          <article class="repo-card">
+            <div class="repo-head">
+              <a class="repo-name" href="https://github.com/hardikarya30/Replit" target="_blank" rel="noopener"><svg class="ic ic-sm"><use href="#i-repo"/></svg>Replit</a>
+              <span class="pill">Public</span>
+            </div>
+            <p class="repo-desc">Design from Replit.</p>
+            <div class="repo-meta">
+              <span class="lang"><i style="background:#3178C6"></i>TypeScript</span>
+              <span>Updated 1mo</span>
+              <button class="repo-star" data-favorite="Replit" aria-label="Add to favourites">☆</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- favourites -->
+      <section class="sec">
+        <div class="section-head">
+          <h2>Favorites</h2>
+          <span class="pill" id="favCount">0</span>
+        </div>
+        <div class="fav-empty" id="favEmpty">
+          <svg class="ic"><use href="#i-star"/></svg>
+          <p><strong>Favourite repositories here to have quick access at any time without having to search.</strong></p>
+          <p class="tiny muted">Tap the star on any repository card to pin it here.</p>
+          <button class="btn btn-gradient" data-scroll-favourites>Favorites</button>
+        </div>
+        <div class="fav-list" id="favList" hidden></div>
+      </section>
+
+      <!-- shortcuts -->
+      <section class="sec">
+        <div class="section-head"><h2>Shortcuts</h2></div>
+        <div class="shortcut-card">
+          <div>
+            <h3>The things you need, one tap away.</h3>
+            <p class="muted">Fast access to your lists of Issues, Pull Requests, or Discussions.</p>
+          </div>
+          <button class="btn btn-gradient" data-page="issues">Get started</button>
+        </div>
+        <div class="shortcut-grid">
+          <a class="shortcut" href="#issues" data-page="issues"><svg class="ic"><use href="#i-issue"/></svg><span>Issues</span></a>
+          <a class="shortcut" href="#pulls" data-page="pulls"><svg class="ic"><use href="#i-pull"/></svg><span>Pull requests</span></a>
+          <a class="shortcut" href="#discussions" data-page="discussions"><svg class="ic"><use href="#i-discussion"/></svg><span>Discussions</span></a>
+        </div>
+      </section>
+
+      <!-- feed preview -->
+      <section class="sec" id="homeFeed">
+        <div class="section-head">
+          <h2>Feed</h2>
+          <a class="section-link" href="#feed" data-page="feed">View all<svg class="ic ic-xs"><use href="#i-chevron-right"/></svg></a>
+        </div>
+        <div class="feed-list compact">
+          <article class="feed-item">
+            <span class="feed-avatar"><img class="avatar-img" src="assets/ha-logo.svg" alt="Hardik Arya" /></span>
+            <div class="feed-body">
+              <p class="feed-line"><strong>hardikarya30</strong> pushed 3 commits to <a href="#repositories" data-page="repositories">Designing-Facebook-Ui-</a></p>
+              <div class="feed-meta"><span class="pill">main</span><span>· 2 hours ago</span></div>
+            </div>
+          </article>
+          <article class="feed-item">
+            <span class="feed-icon"><svg class="ic"><use href="#i-copilot"/></svg></span>
+            <div class="feed-body">
+              <p class="feed-line"><strong>Copilot</strong> opened a pull request <a href="#pulls" data-page="pulls">Liquid glass cards in the dashboard</a></p>
+              <div class="feed-meta"><span class="pill">Review</span><span>· 5 hours ago</span></div>
+            </div>
+          </article>
+          <article class="feed-item">
+            <span class="feed-icon"><svg class="ic"><use href="#i-star"/></svg></span>
+            <div class="feed-body">
+              <p class="feed-line"><strong>hardikarya30</strong> starred <a href="#explore" data-page="explore">swiftui-liquid-glass</a></p>
+              <div class="feed-meta"><span class="pill">Star</span><span>· yesterday</span></div>
+            </div>
+          </article>
+        </div>
+        <a class="btn btn-ghost btn-sm btn-block" href="#feed" data-page="feed" style="margin-top:8px">Open the full feed</a>
+      </section>
+
+      <!-- code analyst -->
+      <section class="sec" id="analyst">
+        <div class="section-head">
+          <h2>Dashboard for Code Analyst</h2>
+          <span class="pill">Live</span>
+        </div>
+        <div class="analyst-grid">
+          <article class="card progress-card">
+            <div class="ball" style="--p:72">
+              <div class="ball-inner">
+                <strong>72%</strong>
+                <span>Code progress</span>
+              </div>
+            </div>
+            <p class="tiny muted">4 of 6 repositories have a green build this week.</p>
+          </article>
+
+          <article class="card gen-card">
+            <div class="gen-head">
+              <h3>Code Generator</h3>
+              <span class="pill">Powered by AI</span>
+            </div>
+            <p class="tiny muted">Describe what you need, get runnable code.</p>
+            <textarea class="gen-input" id="genInput" rows="2" placeholder="A function that validates an email address"></textarea>
+            <button class="btn btn-gradient btn-sm" id="genRun">Generate</button>
+            <pre class="code-out" id="genOutput">// your generated code appears here</pre>
+          </article>
+
+          <article class="card gen-card">
+            <div class="gen-head">
+              <h3>Swift &amp; SwiftUI Generator</h3>
+              <span class="pill">Google / ChatGPT</span>
+            </div>
+            <div class="gen-tabs">
+              <button class="tab active" data-lang="swift">Swift</button>
+              <button class="tab" data-lang="swiftui">SwiftUI</button>
+            </div>
+            <textarea class="gen-input" id="swiftInput" rows="2" placeholder="A glass card with a title and a star button"></textarea>
+            <button class="btn btn-gradient btn-sm" id="swiftRun">Generate code</button>
+            <pre class="code-out" id="swiftOutput">// Swift code appears here</pre>
+          </article>
+        </div>
+      </section>
+
+      <footer class="page-foot">
+        <span class="tiny muted">hardikarya30 · GitHub 3D · liquid glass</span>
+        <a class="tiny" href="signin.html">Sign out</a>
+      </footer>
+    </section>
+
+    <!-- ============================================================ ISSUES -->
+    <section class="page" id="page-issues" data-page-id="issues">
+      <header class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">Page</p>
+          <h1>Issues</h1>
+          <p class="hero-sub">Track bugs, tasks and feature requests across your repositories.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-gradient" data-modal-open="issue">Create issue</button>
+        </div>
+      </header>
+
+      <div class="filter-bar">
+        <button class="chip active">Open 13</button>
+        <button class="chip">Closed 8</button>
+        <button class="chip">Assigned to me</button>
+        <button class="chip">Created by me</button>
+      </div>
+
+      <div class="card list">
+        <div class="list-row">
+          <span class="status-dot open"></span>
+          <div class="list-main"><strong>Instagram feed flickers on scroll</strong><p class="tiny muted">Instagram-app- · opened 2 days ago · bug</p></div>
+          <button class="btn btn-ghost btn-sm">Open</button>
+        </div>
+        <div class="list-row">
+          <span class="status-dot open"></span>
+          <div class="list-main"><strong>Add dark mode to the Facebook UI clone</strong><p class="tiny muted">Designing-Facebook-Ui- · enhancement</p></div>
+          <button class="btn btn-ghost btn-sm">Open</button>
+        </div>
+        <div class="list-row">
+          <span class="status-dot open"></span>
+          <div class="list-main"><strong>Replit build fails on first run</strong><p class="tiny muted">Replit · opened last week · help wanted</p></div>
+          <button class="btn btn-ghost btn-sm">Open</button>
+        </div>
+        <div class="list-row">
+          <span class="status-dot"></span>
+          <div class="list-main"><strong>Profile README copy</strong><p class="tiny muted">hardikarya30 · closed</p></div>
+          <button class="btn btn-ghost btn-sm">Closed</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ PULL REQUESTS -->
+    <section class="page" id="page-pulls" data-page-id="pulls">
+      <header class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">Page</p>
+          <h1>Pull requests</h1>
+          <p class="hero-sub">Review, merge and ship with Copilot on your shoulder.</p>
+        </div>
+        <div class="hero-actions"><button class="btn btn-gradient" data-toast="New pull request draft created">New pull request</button></div>
+      </header>
+      <div class="card list">
+        <div class="list-row">
+          <svg class="ic"><use href="#i-pull"/></svg>
+          <div class="list-main"><strong>Liquid glass cards in the dashboard</strong><p class="tiny muted">#12 · feature/liquid-glass → main · checks passing</p></div>
+          <span class="pill">Open</span>
+        </div>
+        <div class="list-row">
+          <svg class="ic"><use href="#i-repo"/></svg>
+          <div class="list-main"><strong>Refactor the SwiftUI repository card</strong><p class="tiny muted">#11 · refactor/repo-card → main · 1 comment</p></div>
+          <span class="pill">Draft</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== DISCUSSIONS -->
+    <section class="page" id="page-discussions" data-page-id="discussions">
+      <div class="page-head">
+        <h1>Discussions</h1>
+        <p>Conversations with your community.</p>
+      </div>
+      <div class="card">
+        <h2>Welcome to Discussions</h2>
+        <p class="muted">Ask a question, share an idea, or announce a release.</p>
+      </div>
+    </section>
+
+    <!-- ====================== PROJECTS -->
+    <section class="page" id="page-projects" data-page-id="projects">
+      <div class="page-head">
+        <h1>Projects</h1>
+        <p>Plan and track work across your repositories.</p>
+      </div>
+      <div class="card">
+        <h2>Your project boards</h2>
+        <p class="muted">You have no projects yet.</p>
+      </div>
+    </section>
+
+    <!-- ====================== REPOSITORIES ===================== -->
+    <section class="page" id="page-repositories" data-page="repositories">
+      <div class="page-head">
+        <button class="back-btn" data-back>&larr; Back</button>
+        <h2>Repositories</h2>
+        <span class="pill">10</span>
+      </div>
+      <p class="muted">Everything you have built or forked.</p>
+      <div id="repoPageList"></div>
+    </section>
+
+    <!-- ===================== ORGANISATIONS ===================== -->
+    <section class="page" id="page-organisations" data-page="organisations">
+      <div class="page-head">
+        <button class="back-btn" data-back>&larr; Back</button>
+        <h2>Organisations</h2>
+      </div>
+      <div class="card">
+        <p class="muted">You are not a member of any organizations yet.</p>
+      </div>
+    </section>
+
+    <!-- ===================== STARRED ===================== -->
+    <section class="page" id="page-starred" data-page="starred">
+      <div class="page-head">
+        <button class="back-btn" data-back>&larr; Back</button>
+        <h2>Starred repositories</h2>
+      </div>
+      <div class="card">
+        <p class="muted">Star repositories to keep them here.</p>
+      </div>
+    </section>
+
+    <!-- ===================== FEED ===================== -->
+    <section class="page page-feed" data-page="feed">
+      <header class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">Page</p>
+          <h1>Feed</h1>
+          <p class="hero-sub">What is happening across your repositories and the people you follow.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-ghost" data-toast="Feed settings opened">Manage feed</button>
+          <button class="btn btn-gradient" data-toast="Update shared to your feed">Share update</button>
+        </div>
+      </header>
+
+      <div class="feed-toolbar">
+        <div class="feed-filters">
+          <button class="feed-filter active" data-feed-filter="following">Following</button>
+          <button class="feed-filter" data-feed-filter="foryou">For you</button>
+          <button class="feed-filter" data-feed-filter="mine">Your activity</button>
+        </div>
+        <span class="pill">Live</span>
+      </div>
+
+      <div class="feed-list">
+        <article class="feed-item">
+          <span class="feed-avatar"><img class="avatar-img" src="assets/ha-logo.svg" alt="Hardik Arya" /></span>
+          <div class="feed-body">
+            <p class="feed-line"><strong>hardikarya30</strong> pushed 3 commits to <a href="#repositories" data-page="repositories">Designing-Facebook-Ui-</a></p>
+            <div class="feed-meta"><span class="pill">main</span><span>· 2 hours ago</span></div>
+          </div>
+        </article>
+
+        <article class="feed-item">
+          <span class="feed-icon"><svg class="ic"><use href="#i-copilot"/></svg></span>
+          <div class="feed-body">
+            <p class="feed-line"><strong>Copilot</strong> opened a pull request <a href="#pulls" data-page="pulls">Liquid glass cards in the dashboard</a></p>
+            <div class="feed-meta"><span class="pill">Review</span><span>· 5 hours ago</span></div>
+          </div>
+        </article>
+
+        <article class="feed-item">
+          <span class="feed-avatar"><img class="avatar-img" src="assets/ha-logo.svg" alt="Hardik Arya" /></span>
+          <div class="feed-body">
+            <p class="feed-line"><strong>hardikarya30</strong> started a discussion <a href="#discussions" data-page="discussions">Which SwiftUI layout is best for a dashboard?</a></p>
+            <div class="feed-meta"><span class="pill">Discussions</span><span>· yesterday</span></div>
+          </div>
+        </article>
+
+        <article class="feed-item">
+          <span class="feed-icon"><svg class="ic"><use href="#i-star"/></svg></span>
+          <div class="feed-body">
+            <p class="feed-line"><strong>hardikarya30</strong> starred <a href="#explore" data-page="explore">swiftui-liquid-glass</a></p>
+            <div class="feed-meta"><span class="pill">Star</span><span>· yesterday</span></div>
+          </div>
+        </article>
+
+        <article class="feed-item">
+          <span class="feed-avatar"><img class="avatar-img" src="assets/ha-logo.svg" alt="Hardik Arya" /></span>
+          <div class="feed-body">
+            <p class="feed-line"><strong>hardikarya30</strong> created the repository <a href="#repositories" data-page="repositories">ha-freelance</a></p>
+            <div class="feed-meta"><span class="pill">New repo</span><span>· 2 days ago</span></div>
+          </div>
+        </article>
+
+        <article class="feed-item">
+          <span class="feed-icon"><svg class="ic"><use href="#i-pull"/></svg></span>
+          <div class="feed-body">
+            <p class="feed-line"><strong>Copilot</strong> reviewed pull request #11 in <a href="#pulls" data-page="pulls">Designing-Facebook-Ui-</a></p>
+            <div class="feed-meta"><span class="pill">1 comment</span><span>· 2 days ago</span></div>
+          </div>
+        </article>
+
+        <article class="feed-item">
+          <span class="feed-avatar"><img class="avatar-img" src="assets/ha-logo.svg" alt="Hardik Arya" /></span>
+          <div class="feed-body">
+            <p class="feed-line"><strong>hardikarya30</strong> pushed to <a href="#repositories" data-page="repositories">Instagram-app-</a></p>
+            <div class="feed-meta"><span class="pill">main</span><span>· 3 days ago</span></div>
+          </div>
+        </article>
+
+        <article class="feed-item">
+          <span class="feed-icon"><svg class="ic"><use href="#i-code"/></svg></span>
+          <div class="feed-body">
+            <p class="feed-line"><strong>Codespaces</strong> created a workspace for <a href="#codespaces" data-page="codespaces">ha-freelance-6a41</a></p>
+            <div class="feed-meta"><span class="pill">2 cores</span><span>· 4 days ago</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== CODESPACES ===================== -->
+    <section class="page" data-page="codespaces">
+      <div class="page-head"><h1>Codespaces</h1></div>
+      <div class="card">
+        <p class="muted">No codespaces yet.</p>
+      </div>
+    </section>
+
+    <!-- ===================== EXPLORE ===================== -->
+    <section class="page" data-page="explore">
+      <div class="page-head"><h1>Explore</h1></div>
+      <div class="card">
+        <p class="muted">Discover repositories you might like.</p>
+      </div>
+    </section>
+
+    <!-- ===================== MARKETPLACE ===================== -->
+    <section class="page" data-page="marketplace">
+      <div class="page-head"><h1>Marketplace</h1></div>
+      <div class="card">
+        <p class="muted">Apps and tools to improve your workflow.</p>
+      </div>
+    </section>
+
+    <!-- ===================== MCP REGISTRY ===================== -->
+    <section class="page" data-page="mcp">
+      <div class="page-head">
+        <h1>MCP registry</h1>
+        <span class="pill">Remote servers</span>
+      </div>
+      <p class="muted">Model Context Protocol servers you can connect to this workspace. Only remote HTTPS servers can be added — never a local command.</p>
+
+      <div class="card list" style="margin-top:12px">
+        <div class="list-row">
+          <svg class="ic"><use href="#i-globe"/></svg>
+          <div class="list-main"><strong>GitHub MCP</strong><p class="tiny muted">Repositories, issues and pull requests as tools</p></div>
+          <span class="pill">Remote</span>
+          <button class="btn btn-ghost btn-sm" data-toast="Add it from Integrations → Add MCP Server">Connect</button>
+        </div>
+        <div class="list-row">
+          <svg class="ic"><use href="#i-globe"/></svg>
+          <div class="list-main"><strong>Parallel</strong><p class="tiny muted">Web search and fetch for research</p></div>
+          <span class="pill">Remote</span>
+          <button class="btn btn-ghost btn-sm" data-toast="Parallel is already connected">Connected</button>
+        </div>
+        <div class="list-row">
+          <svg class="ic"><use href="#i-globe"/></svg>
+          <div class="list-main"><strong>Design system index</strong><p class="tiny muted">Your tokens, components and SwiftUI views</p></div>
+          <span class="pill">Remote</span>
+          <button class="btn btn-ghost btn-sm" data-toast="Connect from Integrations → Add MCP Server">Connect</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <h2>How to add one</h2>
+        <p class="muted">Open Integrations, tap Add MCP Server…, paste the server's https address and connect. A server with its own sign-in opens its sign-in page.</p>
+        <a class="btn btn-gradient btn-sm" href="#home" data-page="home">Back to the dashboard</a>
+      </div>
+    </section>
+
+    <!-- ===================== PACKAGES ===================== -->
+    <section class="page" data-page="packages">
+      <div class="page-head">
+        <h1>Packages</h1>
+        <span class="pill">0</span>
+      </div>
+      <p class="muted">Publish and share packages with your repositories. Nothing published yet.</p>
+      <div class="card" style="margin-top:12px">
+        <h2>No packages yet</h2>
+        <p class="muted">Packages you publish from Actions or the command line will appear here.</p>
+        <a class="btn btn-gradient btn-sm" href="#repositories" data-page="repositories">Choose a repository</a>
+      </div>
+    </section>
+
+    <!-- ===================== INBOX ===================== -->
+    <section class="page" data-page="inbox">
+      <div class="page-head"><h1>Inbox</h1></div>
+      <div class="card">
+        <p class="muted">You're all caught up.</p>
+      </div>
+    </section>
+
+    <!-- ===================== COPILOT ===================== -->
+    <section class="page" data-page="copilot">
+      <div class="page-head"><h1>Copilot</h1></div>
+      <div class="card">
+        <p class="muted">Your AI pair programmer. Ask it anything.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= right sidebar ================= -->
+  <aside class="sidebar sidebar-right" id="sidebarRight" aria-label="Profile menu">
+    <div class="profile-head">
+      <span class="avatar"><img class="avatar-img" src="assets/ha-logo.svg" alt="Hardik Arya" /></span>
+      <div class="profile-meta">
+        <strong>hardikarya3o</strong>
+        <span class="tiny muted">Hardik Arya · Working from home</span>
+      </div>
+      <button class="icon-btn ghost close-right" id="closeRight" aria-label="Close sidebar">×</button>
+    </div>
+
+    <button class="status-line" data-modal-open="status">
+      <span class="status-dot open"></span>
+      <strong>OPEN</strong>
+      <span class="status-tools">= ×</span>
+      <span class="tiny muted">Set status</span>
+    </button>
+
+    <nav class="nav-group">
+      <button class="nav-item" data-modal-open="repo"><svg class="ic"><use href="#i-plus"/></svg>Create new repository</button>
+      <a class="nav-item" href="#repositories" data-page="repositories"><svg class="ic"><use href="#i-user"/></svg>Profile</a>
+      <a class="nav-item" href="#repositories" data-page="repositories"><svg class="ic"><use href="#i-repo"/></svg>Repositories</a>
+      <a class="nav-item" href="#starred" data-page="starred"><svg class="ic"><use href="#i-star"/></svg>Stars</a>
+      <button class="nav-item" data-toast="Gists coming soon"><svg class="ic"><use href="#i-code"/></svg>Gists</button>
+      <a class="nav-item" href="#organisations" data-page="organisations"><svg class="ic"><use href="#i-globe"/></svg>Organisations</a>
+      <button class="nav-item" data-toast="No enterprises connected"><svg class="ic"><use href="#i-lock"/></svg>Enterprises</button>
+      <a class="nav-item" href="#starred" data-page="starred"><svg class="ic"><use href="#i-star"/></svg>Sponsors</a>
+      <a class="nav-item" href="#home" data-page="home"><svg class="ic"><use href="#i-settings"/></svg>Settings</a>
+      <button class="nav-item" data-toast="Copilot settings"><svg class="ic"><use href="#i-copilot"/></svg>Copilot settings</button>
+      <button class="nav-item" data-toast="Feature preview"><svg class="ic"><use href="#i-sparkle"/></svg>Feature preview</button>
+      <button class="nav-item" data-toast="Appearance: dark 3D"><svg class="ic"><use href="#i-bolt"/></svg>Appearance</button>
+      <button class="nav-item" data-toast="Accessibility settings"><svg class="ic"><use href="#i-user"/></svg>Accessibility</button>
+      <button class="nav-item" data-toast="Try Enterprise"><svg class="ic"><use href="#i-download"/></svg>Try Enterprise<span class="pill new">New</span></button>
+    </nav>
+
+    <div class="nav-sep"></div>
+
+    <div class="plan-row">
+      <span class="pill free">Free</span>
+      <a class="tiny" href="signup.html">Upgrade</a>
+    </div>
+
+    <a class="nav-item danger" href="signin.html"><svg class="ic"><use href="#i-signout"/></svg>Sign out</a>
+  </aside>
+</div>
+
+<!-- ================= bottom dock ================= -->
+<nav class="bottom-nav" aria-label="Quick navigation">
+  <a href="#home" data-page="home" class="active"><svg class="ic"><use href="#i-home"/></svg><span>Home</span></a>
+  <a href="#inbox" data-page="inbox"><svg class="ic"><use href="#i-inbox"/></svg><span>Inbox</span></a>
+  <a href="#explore" data-page="explore"><svg class="ic"><use href="#i-explore"/></svg><span>Explore</span></a>
+  <a href="#copilot" data-page="copilot"><svg class="ic"><use href="#i-copilot"/></svg><span>Copilot</span></a>
+  <a href="#repositories" data-page="repositories" class="bottom-profile">
+    <span class="avatar"><img class="avatar-img" src="assets/ha-logo.svg" alt="" /></span>
+    <span>Profile</span>
+  </a>
+</nav>
+
+<!-- ================= modals ================= -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h2 id="modalTitle">Dialog</h2>
+      <button class="icon-btn ghost" data-close-modal aria-label="Close">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
